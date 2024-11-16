@@ -1,0 +1,379 @@
+[gd_scene load_steps=30 format=3 uid="uid://7rq4xa4etbuv"]
+
+[ext_resource type="Script" path="res://scripts/test_import_starter.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/resources/b3d/VWIB3DImporter.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/utils/LogWriter.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/utils/LoaderUtils.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/objects/Viewer/Viewer.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/resources/VWISceneImporter.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/resources/res/VWIRESImporter.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIPROImporter.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWITXRLoader.gd" id="9"]
+[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIRMPImporter.gd" id="10"]
+[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIPLMLoader.gd" id="11"]
+[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIMTLLoader.gd" id="12"]
+[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIWAVLoader.gd" id="13"]
+[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIMSKLoader.gd" id="14"]
+[ext_resource type="Script" path="res://scripts/utils/ScenesContainer.gd" id="15"]
+[ext_resource type="Script" path="res://scripts/objects/Viewer/dialog_ObjectSwitcher.gd" id="16_2wth5"]
+[ext_resource type="Script" path="res://scripts/objects/Viewer/ViewerMovement.gd" id="16_gxfec"]
+[ext_resource type="Script" path="res://scripts/objects/Viewer/ViewerGUI.gd" id="17_yuba2"]
+[ext_resource type="Script" path="res://scripts/objects/Viewer/dialog_SwitchersList.gd" id="19_k4vr2"]
+[ext_resource type="Script" path="res://scripts/objects/Viewer/window_ScenesList.gd" id="20_4wx56"]
+[ext_resource type="Script" path="res://scripts/objects/Viewer/window_About.gd" id="20_swwte"]
+[ext_resource type="Texture2D" uid="uid://d3cqx0lq7sghy" path="res://app_titlebmp.png" id="22_dnm1h"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qiyrj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vy0wg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_75ga7"]
+
+[sub_resource type="Sky" id="Sky_mgj3m"]
+sky_material = SubResource("ProceduralSkyMaterial_75ga7")
+
+[sub_resource type="Environment" id="Environment_oqopq"]
+background_mode = 2
+sky = SubResource("Sky_mgj3m")
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iareh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qk0bd"]
+metallic_specular = 0.31
+
+[node name="Application" type="Node3D"]
+script = ExtResource("1")
+
+[node name="LogWriter" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="LoaderUtils" type="Node" parent="."]
+script = ExtResource("4")
+
+[node name="MeshImporter" type="Node" parent="LoaderUtils"]
+
+[node name="SceneImporter" type="Node" parent="."]
+script = ExtResource("6")
+
+[node name="B3DImporter" type="Node" parent="SceneImporter"]
+script = ExtResource("2")
+
+[node name="RESImporter" type="Node" parent="SceneImporter"]
+script = ExtResource("7")
+
+[node name="PROImporter" type="Node" parent="SceneImporter/RESImporter"]
+script = ExtResource("8")
+
+[node name="RMPImporter" type="Node" parent="SceneImporter/RESImporter"]
+script = ExtResource("10")
+
+[node name="TXRLoader" type="Node" parent="SceneImporter/RESImporter"]
+script = ExtResource("9")
+
+[node name="TXRtoTGA" type="Node" parent="SceneImporter/RESImporter/TXRLoader"]
+
+[node name="MSKLoader" type="Node" parent="SceneImporter/RESImporter"]
+script = ExtResource("14")
+
+[node name="MTLLoader" type="Node" parent="SceneImporter/RESImporter"]
+script = ExtResource("12")
+
+[node name="PLMLoader" type="Node" parent="SceneImporter/RESImporter"]
+script = ExtResource("11")
+
+[node name="WAVLoader" type="Node" parent="SceneImporter/RESImporter"]
+script = ExtResource("13")
+
+[node name="Scenes" type="Node3D" parent="."]
+script = ExtResource("15")
+
+[node name="Viewer" type="Node3D" parent="."]
+script = ExtResource("5")
+
+[node name="ViewerMovement" type="Node" parent="Viewer"]
+script = ExtResource("16_gxfec")
+
+[node name="ViewerGUI" type="Control" parent="Viewer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("17_yuba2")
+
+[node name="Label_Position" type="Label" parent="Viewer/ViewerGUI"]
+layout_mode = 0
+offset_right = 94.0
+offset_bottom = 26.0
+text = "0.0 ; 0.0 ; 0.0"
+
+[node name="Label_FrameInfo" type="Label" parent="Viewer/ViewerGUI"]
+layout_mode = 0
+offset_top = 14.0
+offset_right = 94.0
+offset_bottom = 40.0
+text = "0.0 ; 0.0 ; 0.0"
+
+[node name="Label_BackgroundMode" type="Label" parent="Viewer/ViewerGUI"]
+layout_mode = 0
+offset_top = 42.0
+offset_right = 94.0
+offset_bottom = 68.0
+text = "0.0 ; 0.0 ; 0.0"
+
+[node name="Label_DrawMode" type="Label" parent="Viewer/ViewerGUI"]
+layout_mode = 0
+offset_top = 56.0
+offset_right = 150.0
+offset_bottom = 82.0
+text = "DrawMode: normal"
+
+[node name="Camera3D" type="Camera3D" parent="Viewer"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+far = 100000.0
+
+[node name="dialog_ObjectSwitcher" type="Window" parent="Viewer"]
+title = "ObjectSwitcher"
+initial_position = 2
+size = Vector2i(470, 256)
+visible = false
+unresizable = true
+script = ExtResource("16_2wth5")
+
+[node name="lbl_module" type="Label" parent="Viewer/dialog_ObjectSwitcher"]
+offset_left = 63.0
+offset_top = 32.0
+offset_right = 127.0
+offset_bottom = 58.0
+text = "module:"
+
+[node name="lbl_object" type="Label" parent="Viewer/dialog_ObjectSwitcher"]
+offset_left = 74.0
+offset_top = 74.0
+offset_right = 127.0
+offset_bottom = 100.0
+text = "object:"
+
+[node name="lbl_msg" type="Label" parent="Viewer/dialog_ObjectSwitcher"]
+offset_left = 74.0
+offset_top = 221.0
+offset_right = 127.0
+offset_bottom = 247.0
+
+[node name="cbox_modules" type="OptionButton" parent="Viewer/dialog_ObjectSwitcher"]
+offset_left = 131.0
+offset_top = 30.0
+offset_right = 398.0
+offset_bottom = 61.0
+
+[node name="text_object" type="LineEdit" parent="Viewer/dialog_ObjectSwitcher"]
+offset_left = 131.0
+offset_top = 70.0
+offset_right = 398.0
+offset_bottom = 101.0
+text = "zil"
+
+[node name="btn_switch" type="Button" parent="Viewer/dialog_ObjectSwitcher"]
+offset_left = 66.0
+offset_top = 115.0
+offset_right = 400.0
+offset_bottom = 146.0
+text = "переключить/switch"
+
+[node name="btn_unhide_all" type="Button" parent="Viewer/dialog_ObjectSwitcher"]
+offset_left = 66.0
+offset_top = 150.0
+offset_right = 400.0
+offset_bottom = 181.0
+text = "показать всё/display all"
+
+[node name="btn_hide_all" type="Button" parent="Viewer/dialog_ObjectSwitcher"]
+offset_left = 66.0
+offset_top = 185.0
+offset_right = 400.0
+offset_bottom = 216.0
+text = "спрятать всё/hide all"
+
+[node name="dialog_File" type="FileDialog" parent="Viewer"]
+initial_position = 2
+size = Vector2i(600, 512)
+ok_button_text = "Save"
+access = 2
+filters = PackedStringArray("*.gltf")
+
+[node name="dialog_SwitchersList" type="Window" parent="Viewer"]
+title = "Switchers"
+initial_position = 2
+size = Vector2i(450, 256)
+visible = false
+unresizable = true
+script = ExtResource("19_k4vr2")
+
+[node name="btn_next_sw" type="Button" parent="Viewer/dialog_SwitchersList"]
+offset_left = 245.0
+offset_top = 25.0
+offset_right = 280.0
+offset_bottom = 60.0
+text = "+"
+
+[node name="btn_reset_sw" type="Button" parent="Viewer/dialog_SwitchersList"]
+offset_left = 285.0
+offset_top = 25.0
+offset_right = 320.0
+offset_bottom = 60.0
+text = "R"
+
+[node name="btn_prev_sw" type="Button" parent="Viewer/dialog_SwitchersList"]
+offset_left = 325.0
+offset_top = 25.0
+offset_right = 360.0
+offset_bottom = 60.0
+text = "-"
+
+[node name="switchers_list" type="ItemList" parent="Viewer/dialog_SwitchersList"]
+offset_right = 230.0
+offset_bottom = 256.0
+select_mode = 1
+
+[node name="lbl_switcher_state" type="Label" parent="Viewer/dialog_SwitchersList"]
+offset_left = 235.0
+offset_right = 431.0
+offset_bottom = 23.0
+text = "Selected switcher state: 0"
+
+[node name="window_ScenesList" type="Window" parent="Viewer"]
+title = "Scenes"
+initial_position = 2
+size = Vector2i(512, 512)
+visible = false
+unresizable = true
+script = ExtResource("20_4wx56")
+
+[node name="scenes_list" type="ItemList" parent="Viewer/window_ScenesList"]
+offset_left = 3.0
+offset_top = 29.0
+offset_right = 254.0
+offset_bottom = 509.0
+
+[node name="objects_list" type="ItemList" parent="Viewer/window_ScenesList"]
+offset_left = 258.0
+offset_top = 29.0
+offset_right = 509.0
+offset_bottom = 509.0
+
+[node name="lbl_scenes" type="Label" parent="Viewer/window_ScenesList"]
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 93.0001
+offset_bottom = 27.0
+text = "Scenes list:"
+
+[node name="lbl_objects" type="Label" parent="Viewer/window_ScenesList"]
+offset_left = 262.735
+offset_top = 4.0
+offset_right = 503.735
+offset_bottom = 27.0
+text = "Selected scene root objects list:"
+
+[node name="window_About" type="Window" parent="Viewer"]
+title = "About"
+initial_position = 2
+size = Vector2i(512, 256)
+visible = false
+unresizable = true
+script = ExtResource("20_swwte")
+
+[node name="lbl_AppName" type="Label" parent="Viewer/window_About"]
+offset_left = 190.48
+offset_top = 26.76
+offset_right = 367.479
+offset_bottom = 49.76
+scale = Vector2(1.415, 1.415)
+text = "Viewer 2024"
+
+[node name="lbl_AppVersion" type="Label" parent="Viewer/window_About"]
+offset_left = 191.995
+offset_top = 56.705
+offset_right = 368.995
+offset_bottom = 79.7051
+text = "v 0.1 (2024.01.01)"
+
+[node name="lbl_Authors" type="Label" parent="Viewer/window_About"]
+offset_left = 82.435
+offset_top = 100.635
+offset_right = 442.435
+offset_bottom = 228.635
+text = "Tool by aleko2144
+Thanks to Duude92, AlexKimov,
+Voron295 and LabVaKars"
+horizontal_alignment = 1
+
+[node name="lbl_engine" type="Label" parent="Viewer/window_About"]
+offset_left = 176.0
+offset_top = 212.41
+offset_right = 346.0
+offset_bottom = 235.41
+text = "Powered by Godot 4.3"
+
+[node name="lbl_VK_link" type="Label" parent="Viewer/window_About"]
+offset_left = 191.995
+offset_top = 230.0
+offset_right = 368.995
+offset_bottom = 253.0
+text = "vk.com/rnr_mods
+"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Viewer"]
+visible = false
+mesh = SubResource("SphereMesh_qiyrj")
+surface_material_override/0 = SubResource("StandardMaterial3D_vy0wg")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Viewer"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+spot_range = 335.592
+
+[node name="LoadScr" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="LoadScr"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("22_dnm1h")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oqopq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.482963, -0.12941, 0, 0.258819, 0.965926, 0.5, -0.836516, 0.224144, 0, 0, 0)
+visible = false
+light_energy = 0.5
+light_bake_mode = 0
+directional_shadow_blend_splits = true
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+visible = false
+aabb = AABB(-2.5, -2.5, -2.5, 5, 5, 5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.646723, 0)
+visible = false
+mesh = SubResource("PlaneMesh_iareh")
+surface_material_override/0 = SubResource("StandardMaterial3D_qk0bd")
+
+[connection signal="close_requested" from="Viewer/dialog_ObjectSwitcher" to="Viewer/dialog_ObjectSwitcher" method="_on_close_requested"]
+[connection signal="pressed" from="Viewer/dialog_ObjectSwitcher/btn_switch" to="Viewer/dialog_ObjectSwitcher" method="_on_btn_switch_pressed"]
+[connection signal="pressed" from="Viewer/dialog_ObjectSwitcher/btn_unhide_all" to="Viewer/dialog_ObjectSwitcher" method="_on_btn_unhide_all_pressed"]
+[connection signal="pressed" from="Viewer/dialog_ObjectSwitcher/btn_hide_all" to="Viewer/dialog_ObjectSwitcher" method="_on_btn_hide_all_pressed"]
+[connection signal="dir_selected" from="Viewer/dialog_File" to="Viewer" method="_on_file_dialog_dir_selected"]
+[connection signal="close_requested" from="Viewer/dialog_SwitchersList" to="Viewer/dialog_SwitchersList" method="_on_close_requested"]
+[connection signal="pressed" from="Viewer/dialog_SwitchersList/btn_next_sw" to="Viewer/dialog_SwitchersList" method="_on_btn_next_sw_pressed"]
+[connection signal="pressed" from="Viewer/dialog_SwitchersList/btn_reset_sw" to="Viewer/dialog_SwitchersList" method="_on_btn_reset_sw_pressed"]
+[connection signal="pressed" from="Viewer/dialog_SwitchersList/btn_prev_sw" to="Viewer/dialog_SwitchersList" method="_on_btn_prev_sw_pressed"]
+[connection signal="item_clicked" from="Viewer/dialog_SwitchersList/switchers_list" to="Viewer/dialog_SwitchersList" method="_on_switchers_list_item_clicked"]
+[connection signal="close_requested" from="Viewer/window_ScenesList" to="Viewer/window_ScenesList" method="_on_close_requested"]
+[connection signal="item_clicked" from="Viewer/window_ScenesList/scenes_list" to="Viewer/window_ScenesList" method="_on_scenes_list_item_clicked"]
+[connection signal="close_requested" from="Viewer/window_About" to="Viewer/window_About" method="_on_close_requested"]

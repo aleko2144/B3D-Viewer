@@ -1,0 +1,22 @@
+;scene: <path> <hide>
+; 1 - путь к файлу,
+; 2 - не отображать ли сцену (только для common.b3d)
+
+;dir: <path>
+; 1 - путь к b3d-файлам
+
+;scene: ../test_res/MIR_inter_demo/INTER.B3D
+;scene: ../test_res/MIR_demo/ALL.B3D
+
+;scene: ../test_res/MSKIER/DHI/SKIER.B3D
+
+scene: ../test_res/drivdemo/SEOUL_.B3D
+;scene: ../test_res/cardemo/RACES_D1.B3D
+
+;scene: ../test_res/flight/AIR.B3D
+
+;scene: ../test_res/D1/MENU3D/MENU3D.B3D
+
+;scene: ../test_res/D1/CIRCUIT/CIRC.B3D
+
+;scene: ../test_res/vrhdemo/COTTAGE_.B3D

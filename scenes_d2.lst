@@ -1,0 +1,22 @@
+;scene: <path> <hide>
+; 1 - путь к файлу,
+; 2 - не отображать ли сцену (только для common.b3d)
+
+;dir: <path>
+; 1 - путь к b3d-файлам
+
+;scene: ../test_res/D2/COMMON/COMMON.B3D
+scene: ../test_res/D2/COMMON/COMMON.B3D : hide
+;scene: ../test_res/MTB_72/tb.b3d
+
+scene: ../test_res/MENV_72/dr.b3d
+
+;scene: ../test_res/D2/ENV/ap.b3d
+;dir: ../test_res/D2/ENV_test/
+;dir: ../test_res/D2/ENV/
+
+;13.0 sec
+;scene: ../test_res/D2/COMMON/TRUCKS_ZIL.B3D 
+
+;127.1 sec
+;scene: ../test_res/D2/COMMON/TRUCKS_test.B3D 
