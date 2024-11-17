@@ -228,9 +228,9 @@ func LoadTXR_LoadData(file : StreamPeerBuffer, _file_length : int) -> Image:
 		print("img=null")
 		breakpoint
 		
-	else:
-		if file_path.contains('forest1.txr'):
-			image.save_png("h:/d2/dev/Viewer_2023/forest1.png")
+	#else:
+	#	if file_path.contains('forest1.txr'):
+	#		image.save_png("h:/d2/dev/Viewer_2023/forest1.png")
 	#	if file_path.contains('grass1.txr'):
 	#		image.save_png("h:/d2/dev/Viewer_2023/grass1.png")
 	
