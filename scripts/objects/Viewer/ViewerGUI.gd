@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 @onready var Viewer : Node3D = get_parent()
 var vertsCount : int

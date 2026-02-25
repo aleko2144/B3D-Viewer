@@ -1,27 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://7rq4xa4etbuv"]
+[gd_scene load_steps=9 format=3 uid="uid://wb7pjxga72n4"]
 
-[ext_resource type="Script" path="res://scripts/test_import_starter.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/resources/b3d/VWIB3DImporter.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/utils/LogWriter.gd" id="3"]
-[ext_resource type="Script" path="res://scripts/utils/LoaderUtils.gd" id="4"]
-[ext_resource type="Script" path="res://scripts/objects/Viewer/Viewer.gd" id="5"]
-[ext_resource type="Script" path="res://scripts/resources/VWISceneImporter.gd" id="6"]
-[ext_resource type="Script" path="res://scripts/resources/res/VWIRESImporter.gd" id="7"]
-[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIPROImporter.gd" id="8"]
-[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWITXRLoader.gd" id="9"]
-[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIRMPImporter.gd" id="10"]
-[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIPLMLoader.gd" id="11"]
-[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIMTLLoader.gd" id="12"]
-[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIWAVLoader.gd" id="13"]
-[ext_resource type="Script" path="res://scripts/resources/res/res_types/VWIMSKLoader.gd" id="14"]
-[ext_resource type="Script" path="res://scripts/utils/ScenesContainer.gd" id="15"]
-[ext_resource type="Script" path="res://scripts/objects/Viewer/dialog_ObjectSwitcher.gd" id="16_2wth5"]
-[ext_resource type="Script" path="res://scripts/objects/Viewer/ViewerMovement.gd" id="16_gxfec"]
-[ext_resource type="Script" path="res://scripts/objects/Viewer/ViewerGUI.gd" id="17_yuba2"]
-[ext_resource type="Script" path="res://scripts/objects/Viewer/dialog_SwitchersList.gd" id="19_k4vr2"]
-[ext_resource type="Script" path="res://scripts/objects/Viewer/window_ScenesList.gd" id="20_4wx56"]
-[ext_resource type="Script" path="res://scripts/objects/Viewer/window_About.gd" id="20_swwte"]
-[ext_resource type="Texture2D" uid="uid://d3cqx0lq7sghy" path="res://app_titlebmp.png" id="22_dnm1h"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_qiyrj"]
 
@@ -43,62 +22,46 @@ ambient_light_color = Color(1, 1, 1, 1)
 metallic_specular = 0.31
 
 [node name="Application" type="Node3D"]
-script = ExtResource("1")
 
 [node name="LogWriter" type="Node" parent="."]
 script = ExtResource("3")
 
 [node name="LoaderUtils" type="Node" parent="."]
-script = ExtResource("4")
 
 [node name="MeshImporter" type="Node" parent="LoaderUtils"]
 
 [node name="SceneImporter" type="Node" parent="."]
-script = ExtResource("6")
 
 [node name="B3DImporter" type="Node" parent="SceneImporter"]
-script = ExtResource("2")
 
 [node name="RESImporter" type="Node" parent="SceneImporter"]
-script = ExtResource("7")
 
 [node name="PROImporter" type="Node" parent="SceneImporter/RESImporter"]
-script = ExtResource("8")
 
 [node name="RMPImporter" type="Node" parent="SceneImporter/RESImporter"]
-script = ExtResource("10")
 
 [node name="TXRLoader" type="Node" parent="SceneImporter/RESImporter"]
-script = ExtResource("9")
 
 [node name="TXRtoTGA" type="Node" parent="SceneImporter/RESImporter/TXRLoader"]
 
 [node name="MSKLoader" type="Node" parent="SceneImporter/RESImporter"]
-script = ExtResource("14")
 
 [node name="MTLLoader" type="Node" parent="SceneImporter/RESImporter"]
-script = ExtResource("12")
 
 [node name="PLMLoader" type="Node" parent="SceneImporter/RESImporter"]
-script = ExtResource("11")
 
 [node name="WAVLoader" type="Node" parent="SceneImporter/RESImporter"]
-script = ExtResource("13")
 
 [node name="Scenes" type="Node3D" parent="."]
-script = ExtResource("15")
 
 [node name="Viewer" type="Node3D" parent="."]
-script = ExtResource("5")
 
 [node name="ViewerMovement" type="Node" parent="Viewer"]
-script = ExtResource("16_gxfec")
 
 [node name="ViewerGUI" type="Control" parent="Viewer"]
 visible = false
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("17_yuba2")
 
 [node name="Label_Position" type="Label" parent="Viewer/ViewerGUI"]
 layout_mode = 0
@@ -137,7 +100,6 @@ initial_position = 2
 size = Vector2i(470, 256)
 visible = false
 unresizable = true
-script = ExtResource("16_2wth5")
 
 [node name="lbl_module" type="Label" parent="Viewer/dialog_ObjectSwitcher"]
 offset_left = 63.0
@@ -206,7 +168,6 @@ initial_position = 2
 size = Vector2i(450, 256)
 visible = false
 unresizable = true
-script = ExtResource("19_k4vr2")
 
 [node name="btn_next_sw" type="Button" parent="Viewer/dialog_SwitchersList"]
 offset_left = 245.0
@@ -246,7 +207,6 @@ initial_position = 2
 size = Vector2i(512, 512)
 visible = false
 unresizable = true
-script = ExtResource("20_4wx56")
 
 [node name="scenes_list" type="ItemList" parent="Viewer/window_ScenesList"]
 offset_left = 3.0
@@ -280,7 +240,6 @@ initial_position = 2
 size = Vector2i(512, 256)
 visible = false
 unresizable = true
-script = ExtResource("20_swwte")
 
 [node name="lbl_AppName" type="Label" parent="Viewer/window_About"]
 offset_left = 190.48
@@ -342,7 +301,6 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("22_dnm1h")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oqopq")
@@ -352,6 +310,7 @@ transform = Transform3D(0.866025, 0.482963, -0.12941, 0, 0.258819, 0.965926, 0.5
 visible = false
 light_energy = 0.5
 light_bake_mode = 0
+shadow_enabled = true
 directional_shadow_blend_splits = true
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://mhmup7o0kcy7"]
+
+[ext_resource type="Script" uid="uid://dfld7hdeoysvg" path="res://scripts/app_main.gd" id="1_t3v2s"]
+
+[sub_resource type="Gradient" id="Gradient_ybd65"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i8tv7"]
+gradient = SubResource("Gradient_ybd65")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sh8tx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lba1g"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_es0tw"]
+
+[sub_resource type="Sky" id="Sky_5ttsf"]
+sky_material = SubResource("ProceduralSkyMaterial_es0tw")
+
+[sub_resource type="Environment" id="Environment_pw802"]
+background_mode = 2
+sky = SubResource("Sky_5ttsf")
+
+[node name="Application" type="Node3D"]
+script = ExtResource("1_t3v2s")
+
+[node name="B3DScene" type="Node3D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 238.0
+offset_bottom = 145.0
+texture = SubResource("GradientTexture2D_i8tv7")
+stretch_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62949, 0, -1.87408)
+mesh = SubResource("CylinderMesh_sh8tx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -2)
+mesh = SubResource("PlaneMesh_lba1g")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pw802")

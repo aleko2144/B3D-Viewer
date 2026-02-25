@@ -1,11 +1,8 @@
-extends Node
+class_name LogWriter
 
-var Root : Node
+static var str_AppVersion : String = 'v 0.1 08.04.25'
 
-func reload():
-	Root = get_tree().get_root().get_child(0)
-
-func getDateFormated() -> String:
+static func getDateFormated() -> String:
 	var str_day : String
 	var int_day : int = Time.get_datetime_dict_from_system()["day"]
 	var str_month : String
@@ -17,7 +14,7 @@ func getDateFormated() -> String:
 	
 	return '%s.%s.%s' % [str_day, str_month, str_year]
 	
-func getTimeFormated() -> String:
+static func getTimeFormated() -> String:
 	var str_hour : String
 	var int_hour : int = Time.get_datetime_dict_from_system()["hour"]
 	var str_minute : String
@@ -31,10 +28,11 @@ func getTimeFormated() -> String:
 	
 	return '%s:%s:%s' % [str_hour, str_minute, str_second]
 
-func writeToLog(text, file_name) -> void:
+static func writeToLog(text, file_name) -> void:
 	print(text)
 	#file_name = profiles_dir + profile_name + '/' + file_name
-	file_name = Root.str_RootDir + file_name
+	#file_name = Root.str_RootDir + file_name
+	file_name = './' + file_name
 
 	if (FileAccess.file_exists(file_name)):
 		var Log : FileAccess = FileAccess.open(file_name, FileAccess.READ_WRITE)
@@ -43,20 +41,19 @@ func writeToLog(text, file_name) -> void:
 	else:
 		var Log : FileAccess = FileAccess.open(file_name, FileAccess.WRITE)
 		Log.store_line(text)
-	
-func writeErrorLog(header, text, file_name) -> void:
+		
+static func writeOutputLog(text) -> void:
 	#'\t v. %s [%s %s]'
-	writeToLog('\t %s [%s %s]' % [Root.str_AppVersion, getDateFormated(), getTimeFormated()], file_name)
-	writeToLog(header, file_name)
-	writeToLog(text + "\n", file_name)
+	writeToLog('\t %s [%s %s]' % [str_AppVersion, getDateFormated(), getTimeFormated()], 'output.log')
+	writeToLog(text + "\n", 'output.log')
 	
-func writeDateToLog(file_name) -> void:
+static func writeErrorLog(text : String, use_breakpoint : bool) -> void:
+	#'\t v. %s [%s %s]'
+	writeToLog('\t %s [%s %s]' % [str_AppVersion, getDateFormated(), getTimeFormated()], 'error.log')
+	#writeToLog(header, file_name)
+	writeToLog(text + "\n", 'error.log')
+	if (use_breakpoint):
+		breakpoint
+	
+static func writeDateToLog(file_name) -> void:
 	writeToLog('\t [%s %s]' % [getDateFormated(), getTimeFormated()], file_name)
-	
-func writeErrorLogAndExit(header, text, file_name) -> void:
-	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (false) else Window.MODE_WINDOWED
-	get_window().borderless = (false)
-	writeErrorLog(header, text, file_name)
-	#breakpoint
-	#Engine.get_main_loop().finish() #в 4.0 вроде как убрать хотят finish()
-	get_tree().quit()

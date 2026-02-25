@@ -92,17 +92,21 @@ func Viewer_Process() -> void:
 	ViewerMovement_ProcessMouseLook(Viewer, false)
 	ViewerMovement_ProcessMovement()
 	
-	if !Viewer.lock_input:
-		if (Input.is_action_just_pressed('viewer_light')):
-			Viewer.get_node('SpotLight3D').visible = !Viewer.get_node('SpotLight3D').visible
+	#if (Input.is_action_just_pressed('viewer_light')):
+	#	Viewer.get_node('SpotLight3D').visible = !Viewer.get_node('SpotLight3D').visible
+	
+	
+	#if !Viewer.lock_input:
+	#	if (Input.is_action_just_pressed('viewer_light')):
+	#		Viewer.get_node('SpotLight3D').visible = !Viewer.get_node('SpotLight3D').visible
 			#var test : Transform3D
 			#test.origin.x = 35
 			#test.origin.y = 25
 			#test.origin.z = 15
 			#self.Viewer_SetTransform(test)
 			
-		if (Input.is_action_just_pressed("viewer_reset_transform")):
-			Viewer.get_parent().Scenes.resetViewerPosition()
+		#if (Input.is_action_just_pressed("viewer_reset_transform")):
+		#	Viewer.get_parent().Scenes.resetViewerPosition()
 		
 	#if (Input.is_action_just_pressed("viewer_show_test_object")):
 	#	if len($dialog/LineEdit.text):
@@ -111,4 +115,7 @@ func Viewer_Process() -> void:
 
 #enum {MODE_FREE_VIEW, FREEZE_MODE_STATIC, MODE_INTERIOR_VIEW, MODE_OUTSIDE_VIEW}
 func _physics_process(_delta):
+	if Viewer.lock_input:
+		return
+	
 	Viewer_Process()
