@@ -1,7 +1,6 @@
-# B3D-Viewer
-Hard Truck *.b3d viewer powered by Godot 4.4.1 engine.
+# B3D Viewer 2.0
+Further development of the project using the Godot 4.4.1 engine.
+This version was created in 2025 and is currently only compatible with older VWI games (up to "Hard Truck 2"). The project is published "as is", despite being far from complete.
 
-Утилита для просмотра b3d-файлов на движке Godot 4.3. Поддерживаются как ранние проекты SoftLab-NSK (MirDemo и т.п.), так и игра Дальнобойщики-2.
-В основе проекта лежат наработки, в том числе, [Duude92](https://github.com/Duude92), [AlexKimov](https://github.com/AlexKimov), [Voron295](https://github.com/Voron295) и [LabVaKars](https://github.com/LabVaKars).
-
-Данный вариант создан в 2025 году и на данный момент совместим только со старыми играми на VWI (до "Дальнобойщиков 2").
+Дальнейшее развитие проекта на движке Godot 4.4.1.
+Данный вариант создан в 2025 году и на данный момент совместим только со старыми играми на VWI (до "Дальнобойщиков 2"). Проект опубликован "как есть", несмотря на то, что далёк до завершения.
